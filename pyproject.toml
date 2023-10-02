@@ -8,6 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+confluent-kafka = "^2.2.0"
+requests = "^2.31.0"
 
 [tool.poetry.group.databricks]
 optional = true

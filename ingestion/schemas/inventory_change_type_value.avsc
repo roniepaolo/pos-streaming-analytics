@@ -1,0 +1,15 @@
+{
+  "type": "record",
+  "name": "test.inventory.types.value",
+  "fields": [
+    {
+      "name": "change_type_id",
+      "type": "int"
+    },
+    {
+      "name": "change_type",
+      "type": "string"
+    }
+  ]
+}
+

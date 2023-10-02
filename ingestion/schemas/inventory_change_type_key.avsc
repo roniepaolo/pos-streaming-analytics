@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "test.inventory.types.key",
+  "fields": [
+    {
+      "name": "change_type_id",
+      "type": "int"
+    }
+  ]
+}

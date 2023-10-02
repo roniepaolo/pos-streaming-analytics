@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "test.items.key",
+  "fields": [
+    {
+      "name": "item_id",
+      "type": "int"
+    }
+  ]
+}

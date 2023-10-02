@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "test.stores.value",
+  "fields": [
+    {
+      "name": "store_id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    }
+  ]
+}

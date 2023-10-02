@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "test.items.value",
+  "fields": [
+    {
+      "name": "item_id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string"
+    },
+    {
+      "name": "supplier_id",
+      "type": "int"
+    },
+    {
+      "name": "safety_stock_quantity",
+      "type": "int"
+    }
+  ]
+}

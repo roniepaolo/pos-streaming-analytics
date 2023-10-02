@@ -1,0 +1,18 @@
+{
+  "type": "record",
+  "name": "test.instore.inventory.transactions.key",
+  "fields": [
+    {
+      "name": "trans_id",
+      "type": "string"
+    },
+    {
+      "name": "item_id",
+      "type": "int"
+    },
+    {
+      "name": "store_id",
+      "type": "int"
+    }
+  ]
+}
