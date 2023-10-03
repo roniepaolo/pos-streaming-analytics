@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.inventory.types.key",
+  "name": "prod.inventory.types.key",
   "fields": [
     {
       "name": "change_type_id",

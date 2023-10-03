@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.stores.key",
+  "name": "prod.stores.key",
   "fields": [
     {
       "name": "store_id",

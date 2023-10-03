@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.inventory.types.value",
+  "name": "prod.inventory.types.value",
   "fields": [
     {
       "name": "change_type_id",
@@ -12,4 +12,3 @@
     }
   ]
 }
-

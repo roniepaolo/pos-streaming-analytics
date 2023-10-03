@@ -1,13 +1,13 @@
 {
   "type": "record",
-  "name": "prod.online.inventory.transactions.value",
+  "name": "prod.instore.inventory.snapshots.value",
   "fields": [
     {
-      "name": "trans_id",
-      "type": "string"
+      "name": "item_id",
+      "type": "int"
     },
     {
-      "name": "item_id",
+      "name": "employee_id",
       "type": "int"
     },
     {
@@ -20,10 +20,6 @@
     },
     {
       "name": "quantity",
-      "type": "int"
-    },
-    {
-      "name": "change_type_id",
       "type": "int"
     }
   ]

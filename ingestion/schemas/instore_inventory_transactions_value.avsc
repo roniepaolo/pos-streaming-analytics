@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.instore.inventory.transactions.value",
+  "name": "prod.instore.inventory.transactions.value",
   "fields": [
     {
       "name": "trans_id",

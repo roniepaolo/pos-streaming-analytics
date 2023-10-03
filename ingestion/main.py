@@ -5,21 +5,28 @@ from utils.kafka_helper import KafkaHelper
 def main():
     kh: KafkaHelper = KafkaHelper(source_strategy=CSVStrategy())
     kh.produce_source(
-        topic="test.stores",
+        topic="prod.stores",
         path="data/store.csv",
         header=["store_id", "name"],
         types=[int, str],
         key=["store_id"],
     )
     kh.produce_source(
-        topic="test.items",
+        topic="prod.items",
         path="data/item.csv",
         header=["item_id", "name", "supplier_id", "safety_stock_quantity"],
         types=[int, str, int, int],
         key=["item_id"],
     )
     kh.produce_source(
-        topic="test.instore.inventory.transactions",
+        topic="prod.inventory.types",
+        path="data/inventory_types.csv",
+        header=["change_type_id", "change_type"],
+        types=[int, str],
+        key=["change_type_id"],
+    )
+    kh.produce_source(
+        topic="prod.instore.inventory.transactions",
         path="data/instore_inventory_transactions.csv",
         header=[
             "trans_id",
@@ -33,7 +40,7 @@ def main():
         key=["trans_id", "item_id", "store_id"],
     )
     kh.produce_source(
-        topic="test.instore.inventory.snapshots",
+        topic="prod.instore.inventory.snapshots",
         path="data/instore_inventory_snapshots.csv",
         header=[
             "item_id",
@@ -46,7 +53,7 @@ def main():
         key=["item_id", "store_id", "date_time"],
     )
     kh.produce_source(
-        topic="test.online.inventory.transactions",
+        topic="prod.online.inventory.transactions",
         path="data/online_inventory_transactions.csv",
         header=[
             "trans_id",
@@ -60,7 +67,7 @@ def main():
         key=["trans_id", "item_id", "store_id"],
     )
     kh.produce_source(
-        topic="test.online.inventory.snapshots",
+        topic="prod.online.inventory.snapshots",
         path="data/online_inventory_snapshots.csv",
         header=[
             "item_id",

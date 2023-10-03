@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.items.value",
+  "name": "prod.items.value",
   "fields": [
     {
       "name": "item_id",

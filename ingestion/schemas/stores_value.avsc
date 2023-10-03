@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "test.stores.value",
+  "name": "prod.stores.value",
   "fields": [
     {
       "name": "store_id",

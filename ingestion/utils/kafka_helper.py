@@ -11,11 +11,28 @@ from utils.source_strategy import SourceStrategy
 
 @dataclass
 class KafkaHelper:
+    """
+    KafkaHelper: Helper class for interacting with Apache Kafka.
+
+    This class provides methods for configuring Kafka clients, retrieving
+    schemas from Confluent Schema Registry, and producing messages to a Kafka
+    topic.
+
+    Attributes:
+        cp_conf (dict[str, str]): Confluent Kafka client configuration.
+        sr_conf (dict[str, str]): Schema Registry client configuration.
+        source_strategy (SourceStrategy): Source strategy for producing =
+            messages.
+    """
+
     cp_conf: dict[str, str] = field(init=False)
     sr_conf: dict[str, str] = field(init=False)
     source_strategy: SourceStrategy
 
     def __post_init__(self) -> None:
+        """
+        Initialize KafkaHelper after reading configuration files.
+        """
         conf_parser: configparser.ConfigParser = configparser.ConfigParser()
         conf_parser.read(Path("config/conf.properties"))
         self.cp_conf = {
@@ -46,6 +63,17 @@ class KafkaHelper:
         key_subject: str,
         value_subject: str,
     ) -> tuple[dict, dict]:
+        """
+        Retrieve key and value schemas from Schema Registry.
+
+        Attributes:
+            sr_client (SchemaRegistryClient): Schema Registry client instance.
+            key_subject (str): Key subject for schema retrieval.
+            value_subject (str): Value subject for schema retrieval.
+
+        Returns:
+            tuple[dict, dict]: Key and value schemas as dictionaries.
+        """
         key_schema: dict = sr_client.get_latest_version(
             key_subject
         ).schema.schema_str
@@ -56,6 +84,17 @@ class KafkaHelper:
         return key_schema, value_schema
 
     def produce_source(self, topic: str, **kwargs) -> None:
+        """
+        Produce messages to a Kafka topic.
+
+        Attributes:
+            topic (str): Kafka topic to produce messages to.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            None
+        """
+        logger.info(f"Producing messages into topic {topic}.")
         sr_client: SchemaRegistryClient = SchemaRegistryClient(self.sr_conf)
         cp_client: Producer = Producer(self.cp_conf)
 
