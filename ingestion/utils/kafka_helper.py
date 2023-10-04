@@ -62,7 +62,7 @@ class KafkaHelper:
         sr_client: SchemaRegistryClient,
         key_subject: str,
         value_subject: str,
-    ) -> tuple[dict, dict]:
+    ) -> tuple[str, str]:
         """
         Retrieve key and value schemas from Schema Registry.
 
@@ -72,12 +72,12 @@ class KafkaHelper:
             value_subject (str): Value subject for schema retrieval.
 
         Returns:
-            tuple[dict, dict]: Key and value schemas as dictionaries.
+            tuple[str, str]: Key and value schemas as dictionaries.
         """
-        key_schema: dict = sr_client.get_latest_version(
+        key_schema: str = sr_client.get_latest_version(
             key_subject
         ).schema.schema_str
-        value_schema: dict = sr_client.get_latest_version(
+        value_schema: str = sr_client.get_latest_version(
             value_subject
         ).schema.schema_str
         logger.info("Key and value schemas were fetched.")
