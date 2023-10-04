@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "prod.online.inventory.transactions.value",
+  "name": "prod.inventory.transactions.value",
   "fields": [
     {
       "name": "trans_id",

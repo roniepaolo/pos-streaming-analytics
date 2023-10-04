@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "prod.instore.inventory.snapshots.value",
+  "name": "prod.inventory.snapshots.value",
   "fields": [
     {
       "name": "item_id",

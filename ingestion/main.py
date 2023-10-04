@@ -26,7 +26,7 @@ def main():
         key=["change_type_id"],
     )
     kh.produce_source(
-        topic="prod.instore.inventory.transactions",
+        topic="prod.inventory.transactions",
         path="data/instore_inventory_transactions.csv",
         header=[
             "trans_id",
@@ -40,7 +40,7 @@ def main():
         key=["trans_id", "item_id", "store_id"],
     )
     kh.produce_source(
-        topic="prod.instore.inventory.snapshots",
+        topic="prod.inventory.snapshots",
         path="data/instore_inventory_snapshots.csv",
         header=[
             "item_id",
@@ -53,7 +53,7 @@ def main():
         key=["item_id", "store_id", "date_time"],
     )
     kh.produce_source(
-        topic="prod.online.inventory.transactions",
+        topic="prod.inventory.transactions",
         path="data/online_inventory_transactions.csv",
         header=[
             "trans_id",
@@ -67,7 +67,7 @@ def main():
         key=["trans_id", "item_id", "store_id"],
     )
     kh.produce_source(
-        topic="prod.online.inventory.snapshots",
+        topic="prod.inventory.snapshots",
         path="data/online_inventory_snapshots.csv",
         header=[
             "item_id",
