@@ -1,6 +1,6 @@
 # Databricks notebook source
 # MAGIC %md
-# MAGIC # Streaming - Bronze to Silver
+# MAGIC # Batch - Bronze to Silver
 
 # COMMAND ----------
 
@@ -10,40 +10,83 @@
 # COMMAND ----------
 
 import pyspark
-from pyspark.sql.functions import regexp_extract, to_timestamp, countDistinct
+from pyspark.sql.functions import to_timestamp
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Catalog, schema and table names are set for next steps.
+# MAGIC Catalog and schema names are set for next steps.
 
 # COMMAND ----------
 
 catalog = "training"
 schema = "test_pos_silver"
-table = "inventory_transactions"
 
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC Structured Stream is processed and saved in the silver layer.
+# MAGIC ### Stores
 
 # COMMAND ----------
 
+table = "stores"
 (
-    spark.readStream.table("training.test_pos.inventory_transactions")
+    spark.read.table(f"training.test_pos.{table}")
     .select("avro_value.*")
-    .withColumns(
-        {
-            "trans_id": regexp_extract("trans_id", "\{(.*)\}", 1),
-            "date_time": to_timestamp("date_time"),
-        }
-    )
-    .withWatermark("date_time", "1 hour")
-    .dropDuplicates(["trans_id", "item_id"])
-    .writeStream
+    .write
+    .format("delta")
+    .mode("overwrite")
+    .saveAsTable(f"{catalog}.{schema}.{table}")
+)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Items
+
+# COMMAND ----------
+
+table = "items"
+(
+    spark.read.table(f"training.test_pos.{table}")
+    .select("avro_value.*")
+    .write
+    .format("delta")
+    .mode("overwrite")
+    .saveAsTable(f"{catalog}.{schema}.{table}")
+)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Inventory Types
+
+# COMMAND ----------
+
+table = "inventory_types"
+(
+    spark.read.table(f"training.test_pos.{table}")
+    .select("avro_value.*")
+    .write
+    .format("delta")
+    .mode("overwrite")
+    .saveAsTable(f"{catalog}.{schema}.{table}")
+)
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ### Inventory Snapshots
+
+# COMMAND ----------
+
+table = "inventory_snapshots"
+(
+    spark.read.table(f"training.test_pos.{table}")
+    .select("avro_value.*")
+    .withColumn("date_time", to_timestamp("date_time"))
+    .write
     .format("delta")
     .mode("append")
-    .queryName(f"{catalog}_{schema}_{table}")
-    .toTable(f"{catalog}.{schema}.{table}")
+    .saveAsTable(f"{catalog}.{schema}.{table}")
 )

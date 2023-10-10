@@ -33,7 +33,3 @@ trigger = {"availableNow": None, "processingTime": "0 seconds"}
 topic = "prod.inventory.transactions"
 table = "inventory_transactions"
 ingest(spark, topic, catalog, schema, table, trigger)
-
-# COMMAND ----------
-
-

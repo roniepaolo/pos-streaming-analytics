@@ -21,7 +21,6 @@ from pyspark.sql.functions import regexp_extract, to_timestamp, countDistinct
 
 catalog = "training"
 schema = "test_pos_silver"
-table = "inventory_transactions"
 
 # COMMAND ----------
 
@@ -30,8 +29,9 @@ table = "inventory_transactions"
 
 # COMMAND ----------
 
+table = "inventory_transactions"
 (
-    spark.readStream.table("training.test_pos.inventory_transactions")
+    spark.readStream.table(f"training.test_pos.{table}")
     .select("avro_value.*")
     .withColumns(
         {

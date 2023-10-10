@@ -45,7 +45,3 @@ ingest(spark, topic, catalog, schema, table, trigger)
 topic = "prod.inventory.snapshots"
 table = "inventory_snapshots"
 ingest(spark, topic, catalog, schema, table, trigger)
-
-# COMMAND ----------
-
-
