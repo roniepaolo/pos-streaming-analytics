@@ -29,14 +29,15 @@ schema = "test_pos_silver"
 
 # COMMAND ----------
 
-table = "stores"
+source_table = "stores"
+target_table = "stores"
 (
-    spark.read.table(f"training.test_pos.{table}")
+    spark.read.table(f"training.test_pos.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{table}")
+    .saveAsTable(f"{catalog}.{schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -46,14 +47,15 @@ table = "stores"
 
 # COMMAND ----------
 
-table = "items"
+source_table = "items"
+target_table = "items"
 (
-    spark.read.table(f"training.test_pos.{table}")
+    spark.read.table(f"training.test_pos.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{table}")
+    .saveAsTable(f"{catalog}.{schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -63,14 +65,15 @@ table = "items"
 
 # COMMAND ----------
 
-table = "inventory_types"
+source_table = "inventory_types"
+target_table = "inventory_types"
 (
-    spark.read.table(f"training.test_pos.{table}")
+    spark.read.table(f"training.test_pos.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{table}")
+    .saveAsTable(f"{catalog}.{schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -80,13 +83,14 @@ table = "inventory_types"
 
 # COMMAND ----------
 
-table = "inventory_snapshots"
+source_table = "inventory_snapshots"
+target_table = "inventory_snapshots"
 (
-    spark.read.table(f"training.test_pos.{table}")
+    spark.read.table(f"training.test_pos.{source_table}")
     .select("avro_value.*")
     .withColumn("date_time", to_timestamp("date_time"))
     .write
     .format("delta")
     .mode("append")
-    .saveAsTable(f"{catalog}.{schema}.{table}")
+    .saveAsTable(f"{catalog}.{schema}.{target_table}")
 )

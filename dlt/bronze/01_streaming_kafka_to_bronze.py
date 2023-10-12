@@ -31,5 +31,5 @@ schema = "test_pos"
 trigger = {"availableNow": None, "processingTime": "0 seconds"}
 
 topic = "prod.inventory.transactions"
-table = "inventory_transactions"
+table = "inventory_transactions2"
 ingest(spark, topic, catalog, schema, table, trigger)

@@ -25,13 +25,19 @@ schema = "test_pos_silver"
 # COMMAND ----------
 
 # MAGIC %md
+# MAGIC ### Inventory Transactions
+
+# COMMAND ----------
+
+# MAGIC %md
 # MAGIC Structured Stream is processed and saved in the silver layer.
 
 # COMMAND ----------
 
-table = "inventory_transactions"
+source_table = "inventory_transactions2"
+target_table = "inventory_transactions4"
 (
-    spark.readStream.table(f"training.test_pos.{table}")
+    spark.readStream.table(f"training.test_pos.{source_table}")
     .select("avro_value.*")
     .withColumns(
         {
@@ -41,9 +47,12 @@ table = "inventory_transactions"
     )
     .withWatermark("date_time", "1 hour")
     .dropDuplicates(["trans_id", "item_id"])
-    .writeStream
-    .format("delta")
-    .mode("append")
-    .queryName(f"{catalog}_{schema}_{table}")
-    .toTable(f"{catalog}.{schema}.{table}")
+    .writeStream.format("delta")
+    .outputMode("append")
+    .option(
+        "checkpointLocation",
+        f"/user/hive/warehouse/{schema}/{target_table}/_checkpoints",
+    )
+    .queryName(f"{catalog}_{schema}_{target_table}")
+    .toTable(f"{catalog}.{schema}.{target_table}")
 )
