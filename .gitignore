@@ -176,4 +176,7 @@ pyrightconfig.json
 # Poetry
 poetry.lock
 
+# Data
+*.csv
+
 # End of https://www.toptal.com/developers/gitignore/api/python
