@@ -27,7 +27,7 @@ from ingestion_helper import ingest
 # COMMAND ----------
 
 catalog = "training"
-schema = "test_pos"
+schema = "pos_bronze"
 trigger = {"availableNow": True, "processingTime": None}
 
 topic = "prod.items"

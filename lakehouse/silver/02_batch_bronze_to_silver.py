@@ -20,7 +20,8 @@ from pyspark.sql.functions import to_timestamp
 # COMMAND ----------
 
 catalog = "training"
-schema = "test_pos_silver"
+source_schema = "pos_bronze"
+target_schema = "pos_silver"
 
 # COMMAND ----------
 
@@ -32,12 +33,12 @@ schema = "test_pos_silver"
 source_table = "stores"
 target_table = "stores"
 (
-    spark.read.table(f"training.test_pos.{source_table}")
+    spark.read.table(f"{catalog}.{source_schema}.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{target_table}")
+    .saveAsTable(f"{catalog}.{target_schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -50,12 +51,12 @@ target_table = "stores"
 source_table = "items"
 target_table = "items"
 (
-    spark.read.table(f"training.test_pos.{source_table}")
+    spark.read.table(f"{catalog}.{source_schema}.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{target_table}")
+    .saveAsTable(f"{catalog}.{target_schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -68,12 +69,12 @@ target_table = "items"
 source_table = "inventory_types"
 target_table = "inventory_types"
 (
-    spark.read.table(f"training.test_pos.{source_table}")
+    spark.read.table(f"{catalog}.{source_schema}.{source_table}")
     .select("avro_value.*")
     .write
     .format("delta")
     .mode("overwrite")
-    .saveAsTable(f"{catalog}.{schema}.{target_table}")
+    .saveAsTable(f"{catalog}.{target_schema}.{target_table}")
 )
 
 # COMMAND ----------
@@ -86,11 +87,11 @@ target_table = "inventory_types"
 source_table = "inventory_snapshots"
 target_table = "inventory_snapshots"
 (
-    spark.read.table(f"training.test_pos.{source_table}")
+    spark.read.table(f"{catalog}.{source_schema}.{source_table}")
     .select("avro_value.*")
     .withColumn("date_time", to_timestamp("date_time"))
     .write
     .format("delta")
     .mode("append")
-    .saveAsTable(f"{catalog}.{schema}.{target_table}")
+    .saveAsTable(f"{catalog}.{target_schema}.{target_table}")
 )

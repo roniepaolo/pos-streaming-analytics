@@ -20,7 +20,8 @@ from pyspark.sql.functions import regexp_extract, to_timestamp, countDistinct
 # COMMAND ----------
 
 catalog = "training"
-schema = "test_pos_silver"
+source_schema = "pos_bronze"
+target_schema = "pos_silver"
 
 # COMMAND ----------
 
@@ -34,10 +35,10 @@ schema = "test_pos_silver"
 
 # COMMAND ----------
 
-source_table = "inventory_transactions2"
-target_table = "inventory_transactions4"
+source_table = "inventory_transactions"
+target_table = "inventory_transactions"
 (
-    spark.readStream.table(f"training.test_pos.{source_table}")
+    spark.readStream.table(f"{catalog}.{source_schema}.{source_table}")
     .select("avro_value.*")
     .withColumns(
         {

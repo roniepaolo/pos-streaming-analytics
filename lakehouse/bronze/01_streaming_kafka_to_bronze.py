@@ -27,9 +27,9 @@ from ingestion_helper import ingest
 # COMMAND ----------
 
 catalog = "training"
-schema = "test_pos"
+schema = "pos_bronze"
 trigger = {"availableNow": None, "processingTime": "0 seconds"}
 
 topic = "prod.inventory.transactions"
-table = "inventory_transactions2"
+table = "inventory_transactions"
 ingest(spark, topic, catalog, schema, table, trigger)

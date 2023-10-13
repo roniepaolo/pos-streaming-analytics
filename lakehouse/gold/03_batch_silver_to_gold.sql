@@ -10,12 +10,12 @@
 -- COMMAND ----------
 
 create
-or replace view training.test_pos_gold.view_last_snapshots as with snapshots as (
+or replace view training.pos_gold.view_last_snapshots as with snapshots as (
   select
     *,
     row_number() over w_last_ss as last_ss
   from
-    training.test_pos_silver.inventory_snapshots window w_last_ss as (
+    training.pos_silver.inventory_snapshots window w_last_ss as (
       partition by store_id,
       item_id
       order by
@@ -39,7 +39,7 @@ where
 -- COMMAND ----------
 
 create
-or replace view training.test_pos_gold.view_inventory_current as
+or replace view training.pos_gold.view_inventory_current as
 select
   t.name as store_name,
   m.name item_name,
@@ -48,7 +48,7 @@ select
   first(h.quantity) + coalesce(sum(t.quantity), 0) as current_inventory,
   greatest(first(h.date_time), max(t.date_time)) as date_time
 from
-  training.test_pos_gold.view_last_snapshots h
+  training.pos_gold.view_last_snapshots h
   inner join (
     select
       x.store_id,
@@ -57,9 +57,9 @@ from
       x.quantity,
       s.name
     from
-      training.test_pos_silver.inventory_transactions4 x
-      inner join training.test_pos_silver.stores s on s.store_id = x.store_id
-      inner join training.test_pos_silver.inventory_types i on i.change_type_id = x.change_type_id
+      training.pos_silver.inventory_transactions x
+      inner join training.pos_silver.stores s on s.store_id = x.store_id
+      inner join training.pos_silver.inventory_types i on i.change_type_id = x.change_type_id
     where
       not (
         s.name = 'online'
@@ -68,7 +68,7 @@ from
   ) t on t.store_id = h.store_id
   and t.item_id = h.item_id
   and t.date_time >= h.date_time
-  inner join training.test_pos_silver.items m on m.item_id = h.item_id
+  inner join training.pos_silver.items m on m.item_id = h.item_id
 group by
   1,
   2
