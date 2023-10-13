@@ -1,4 +1,4 @@
-# POS Streaming Analytics
+# POS Streaming Analytics in Lakehouse
 
 Point-of-sale analytics involves gathering and scrutinizing information obtained from retail transaction processing at checkout. Each transaction contributes data to various aspects: inventory, sales, products, customers, and staff. Given the unpredictable market fluctuations and shrinking profit margins in retail, POS analytics holds immense importance for retailers. It allows them to optimize their inventory management strategies, ensuring efficiency. With a POS system that records and presents inventory-related data, retailers gain valuable insights into their sales, stock management, and stagnant inventory, enabling informed decisions.
 
