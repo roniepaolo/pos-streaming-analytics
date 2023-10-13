@@ -1,5 +1,7 @@
 # POS Streaming Analytics
 
+Point-of-sale analytics involves gathering and scrutinizing information obtained from retail transaction processing at checkout. Each transaction contributes data to various aspects: inventory, sales, products, customers, and staff. Given the unpredictable market fluctuations and shrinking profit margins in retail, POS analytics holds immense importance for retailers. It allows them to optimize their inventory management strategies, ensuring efficiency. With a POS system that records and presents inventory-related data, retailers gain valuable insights into their sales, stock management, and stagnant inventory, enabling informed decisions.
+
 The data used in this project was taken from Databricks [repository](https://github.com/databricks/tech-talks/blob/master/datasets/point_of_sale_simulated.zip). This data is produced in Confluent Kafka to have a real-time data generator that can be ingested in Lakehouse and be processed in a Medallion Architecture.
 
 ## 1. Architecture
@@ -112,3 +114,9 @@ All created tables were managed tables, and they were stored in an account's met
 
 ## 5. Dashboard
 <img src="https://raw.githubusercontent.com/roniepaolo/pos-streaming-analytics/main/images/dashboard.png" alt="drawing" width="1000"/>
+
+## 6. References
+* [Real-Time Point-of-Sale Analytics](https://www.databricks.com/solutions/accelerators/real-time-point-of-sale-analytics)
+* [The future of shopping: Technology everywhere](https://www.mckinsey.com/featured-insights/the-next-normal/shopping)
+* [How Covid-19 Changed Retail - Probably Forever](https://www.forbes.com/sites/forbesbusinesscouncil/2021/07/22/how-covid-19-changed-retail---probably-forever/?sh=2db778e2145c)
+* [$1 Trillion Problem: Managing Out-of-Stocks and Omnichannel Fulfillment During COVID-19](https://risnews.com/1-trillion-problem-managing-out-stocks-and-omnichannel-fulfillment-during-covid-19)
